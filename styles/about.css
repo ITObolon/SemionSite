@@ -1,28 +1,10 @@
-/* ========================= */
-/*        ABOUT SECTION      */
-/* ========================= */
-
 #about {
     padding: 0 20px;
     position: relative;
     z-index: 4;
     text-align: center;
-overflow: hidden;
-    /* ФОН */
-    background: linear-gradient(270deg, #0b1220, #1a1a2e, #0b1220, #1a1a2e);
-    background-size: 400% 400%;
-    animation: gradientShift 10s ease infinite;
+    overflow: hidden;
     color: var(--white);
-}
-
-/* Лёгкая прозрачная подложка как в hero */
-#about::before {
-    content: "";
-    position: absolute;
-    inset: 0;
-    z-index: 1;
-        background: radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.1), transparent 70%);
-    animation: wave 10s infinite linear;
 }
 
 #about > * {
@@ -34,7 +16,6 @@ overflow: hidden;
     font-size: 42px;
     font-weight: 700;
     margin-bottom: 15px;
-    color: var(--white);
     letter-spacing: -0.5px;
 }
 
@@ -93,14 +74,4 @@ overflow: hidden;
     color: rgba(255,255,255,0.85);
 }
 
-/* Fade animation */
-@keyframes fadeUp {
-    from {
-        opacity: 0;
-        transform: translateY(18px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
+

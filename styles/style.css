@@ -1,53 +1,107 @@
-  /* ========================
-     RESET / MOBILE-FIRST BASE
-     ======================== */
-  :root {
- 
-      --dark: #0e1821;
-      --muted: #6b7280;
-      --bg: #ffffff;
-      --card: #fbfdff;
-      --radius: 12px;
-       --primary: #0b1220;
-    --accent: #f7b733;
-    --white: #ffffff;
-    --light-bg: rgba(255, 255, 255, 0.1);
-    --transition: 0.35s ease;
-    --btn-color: #f7b733;
-    --btn-hover: #fc4a1a;
-    --bg-gradient: linear-gradient(135deg, #0b1220, #1a1a2e, #0b1220);
-  }
+.flex {
+  display: flex;
+}
 
-  * {
-      margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
-  }
+.flex-center {
+  justify-content: center;
+  align-items: center;
+}
 
-  html,
-  body {
-      height: 100%
-  }
+.flex-between {
+  justify-content: space-between;
+  align-items: center;
+}
 
-  body {
-      background: linear-gradient(180deg, #f7fbff 0%, #ffffff 100%);
-      color: var(--dark);
-      -webkit-font-smoothing: antialiased;
-      -moz-osx-font-smoothing: grayscale;
-      line-height: 1.45;
-      padding-bottom: 4rem;
-  }
+.flex-col {
+  flex-direction: column;
+}
 
-  a {
-      color: var(--accent);
-      text-decoration: none
-  }
+.full-width {
+  width: 100%;
+}
 
-  img {
-      max-width: 100%;
-      height: auto;
-      display: block
-  }
+:root {
+  --dark: #0e1821;
+  --muted: #6b7280;
+  --bg: #ffffff;
+  --card: #fbfdff;
+  --radius: 12px;
+  --primary: #0b1220;
+  --accent: #f7b733;
+  --white: #ffffff;
+  --light-bg: rgba(255, 255, 255, 0.1);
+  --transition: 0.35s ease;
+  --btn-color: #f7b733;
+  --btn-hover: #fc4a1a;
+  --bg-gradient: linear-gradient(135deg, #0b1220, #1a1a2e, #0b1220);
+}
 
-  
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+}
+
+html,
+body {
+  height: 100%;
+  width:100%;
+  background: var(--bg-gradient);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  line-height: 1.45;
+  padding-bottom: 4rem;
+  color: var(--white);
+
+}
+
+#overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100%;
+  background: linear-gradient(135deg,
+      rgba(247, 183, 51, 0.15),
+      rgba(0, 0, 0, 0.6));
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  z-index: 40;
+  pointer-events: none;
+}
+
+a {
+  color: var(--accent);
+  text-decoration: none
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block
+}
+
+.rounded {
+  border-radius: 14px;
+}
+
+.content {
+  position: relative;
+  width:90%;
+}
+@keyframes fadeUp {
+    from {
+        opacity: 0;
+        transform: translateY(18px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@media (max-width: 899px) {
+.content{
+  width:95%;
+}
+}

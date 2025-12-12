@@ -13,6 +13,7 @@
     <link rel="stylesheet" href="./styles/header.css">
     <link rel="stylesheet" href="./styles/hero.css">
     <link rel="stylesheet" href="./styles/about.css">
+    <!-- <link rel="stylesheet" href="./styles/about.css"> -->
     <!-- Structured data (LocalBusiness) -->
     <script type="application/ld+json">
   {
@@ -25,35 +26,56 @@
     "url": "",
     "address": {
       "@type": "PostalAddress",
-      "addressLocality": "Ваше місто"
+      "addressLocality": "Київ"
     }
   }
   </script>
 </head>
 
-<body>
-    <div id="header"></div>
-    <div id="overlay"></div>
-    <div id="hero"></div>
-    <main id="home" class="container">
-        <div id="about"></div>
-        <div id="services"></div>
-        <div id="portfolio"></div>
-        <div id="reviews"></div>
-        <div id="contacts"></div>
-    </main>
-    <div id="footer"></div>
-    <div id="modals"></div>
+<body class="flex flex-col flex-center full-width" style="justify-content: flex-start;">
+    <div class="content flex flex-col">
+        <div id="header"></div>
+        <div id="hero"></div>
+        <main id="home" class="container">
+            <div id="about"></div>
+            <div id="services"></div>
+            <div id="portfolio"></div>
+            <div id="reviews"></div>
+            <div id="contacts"></div>
+        </main>
+        <div id="footer"></div>
+        <div id="modals"></div>
+    </div>
+    <div id="overlay full-width"></div>
     <script>
-        async function loadComponent(id, file) {
-            document.getElementById(id).innerHTML = await (await fetch(`components/${file}`)).text();
+        async function loadComponentHTML(id, file) {
+            const html = await (await fetch(file)).text();
+            const oldEl = document.getElementById(id);
+            const temp = document.createElement('div');
+            temp.innerHTML = html.trim();
+            const newEl = temp.firstElementChild;
+            oldEl.replaceWith(newEl);
         }
-        const components = ['header', 'hero', 'about'/*, 'services', 'portfolio', 'reviews', 'contacts', 'footer', */, 'modals']
-        components.forEach(c => loadComponent(c, `${c}.html`))
+        async function loadComponentJS(file) {
+            return new Promise((resolve, reject) => {
+                const script = document.createElement('script');
+                script.src = file;
+                script.onload = resolve;
+                script.onerror = reject;
+                document.body.appendChild(script);
+            });
+        }
+        async function loadComponentsSequentially() {
+            const components = ['header', 'hero', 'about',];
+            // const components = [ 'about', 'services', 'portfolio', 'reviews', 'contacts', 'footer',];
+            for (const c of components) {
+                await loadComponentHTML(c, `./components/${c}.html`);
+                await loadComponentJS(`./src/${c}.js`);
+            }
+        }
+        loadComponentsSequentially();
     </script>
     <script src="./src/script.js"></script>
-    <script src="./src/header.js"></script>
-
 </body>
 
 </html>

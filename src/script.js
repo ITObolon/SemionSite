@@ -1,7 +1,10 @@
 // ===============================
 // Basic UI + Slider + Forms JS
 // ===============================
-document.getElementById("year").textContent = new Date().getFullYear();
+const year = document.getElementById("year");
+if (year) {
+  year.textContent = new Date().getFullYear();
+}
 
 // MODAL helpers
 function openModal(id) {
@@ -9,7 +12,6 @@ function openModal(id) {
   document.getElementById("modalBackdrop").setAttribute("aria-hidden", "false");
   const mod = document.getElementById(id);
   mod.style.display = "block";
-  // hide others
   Array.from(document.querySelectorAll(".modal")).forEach((m) => {
     if (m.id !== id) m.style.display = "none";
   });
@@ -44,9 +46,9 @@ function closeAllModals(e) {
 // SLIDER
 let current = 0;
 const slides = document.getElementById("slides");
-const totalSlides = slides.children.length;
+const totalSlides = slides?.children?.length || 0;
 function updateSlider() {
-  slides.style.transform = "translateX(" + -current * 100 + "%)";
+  if (slides) slides.style.transform = "translateX(" + -current * 100 + "%)";
 }
 function nextSlide() {
   current = (current + 1) % totalSlides;
@@ -129,13 +131,11 @@ function submitFeedback(e) {
   return false;
 }
 
-// Optional: stop auto slider on interaction
-document
-  .querySelector(".slider")
-  .addEventListener("mouseover", () => clearInterval(sliderTimer));
-document
-  .querySelector(".slider")
-  .addEventListener(
+const slider = document.querySelector(".slider");
+if (slider) {
+  slider.addEventListener("mouseover", () => clearInterval(sliderTimer));
+  slider.addEventListener(
     "mouseleave",
     () => (sliderTimer = setInterval(nextSlide, 8000))
   );
+}

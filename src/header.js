@@ -34,11 +34,27 @@ const mobileMenuToggle = () =>
       burgerCheckbox.checked = false;
     });
   });
+function toggleMobileNav(btn) {
+  const expanded = btn.getAttribute("aria-expanded") === "true";
+  btn.setAttribute("aria-expanded", !expanded);
+  const mobile = document.getElementById("mobileNav");
+  mobile.style.display = expanded ? "none" : "block";
+}
+function closeMobileNav() {
+  document.getElementById("mobileNav").style.display = "none";
+  document.querySelector(".hamburger").setAttribute("aria-expanded", "false");
+}
+function navContentBack() {
+  const checkbox = document.querySelector(".burger-checkbox");
+  const overlay = document.getElementById("overlay");
 
-document.addEventListener("DOMContentLoaded", () => {
-  setTimeout(() => {
-    renderNavLinks();
-    mobileMenuToggle();
-  }, 100); // рендерим ссылки навигации после загрузки DOM
-  const burgerCheckbox = document.getElementById("burger-checkbox");
-});
+  checkbox.addEventListener("change", () => {
+    if (checkbox.checked) {
+      overlay.style.opacity = "1";
+      overlay.style.pointerEvents = "all";
+    } else {
+      overlay.style.opacity = "0";
+      overlay.style.pointerEvents = "none";
+    }
+  });
+}
